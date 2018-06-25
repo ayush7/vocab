@@ -9,6 +9,7 @@ ENVIRONMENT = readenv()
 
 app = Flask(__name__)
 app.config['MONGO_HOST'] = ENVIRONMENT['MONGO_HOST']
+app.config['MONGO_DBNAME'] = ENVIRONMENT['MONGO_DBNAME']
 mongo = PyMongo(app)
 
 # The basic viewing route

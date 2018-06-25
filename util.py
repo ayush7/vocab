@@ -5,7 +5,7 @@ def readenvline(line, dictionary):
 	# @param line: string of form 'key=value', no spaces
 	# Parse and insert line into 'dicionary'
 	try:
-		envvar = line.replace(' ', '').split('=')
+		envvar = line.replace(' ', '').strip().split('=')
 		dictionary[envvar[0]] = envvar[1]
 	except IndexError:
 		# incorrect format
@@ -15,5 +15,6 @@ def readenv():
 	# read env variables into dictionary and return
 	d = {}
 	with open(ENV_FILENAME, 'r') as f:
-		readenvline(f.readline(), d)
+		for line in f:
+			readenvline(line, d)
 	return d
