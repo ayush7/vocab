@@ -36,6 +36,7 @@
 					  </label>
 					</div>
 				  <button type="submit" class="btn btn-default" id="input_word_submit">Submit</button>
+				  <span id="input_success_message"></span>
 				</form>
 			</div>
 			<div class="col-md-6">
@@ -53,6 +54,7 @@
 	// Submit script
 	$("#input_new_word_form").submit(function(event){
 		event.preventDefault();
+		$("#input_success_message").html("");
     var isValid = true;
 
     // do all your validation here
@@ -75,6 +77,11 @@
         $.get(api_call, function(data) {
 				  console.log(data);
 				  // write success/fail message in some div element
+				  if (data.success) {
+				  	$("#input_success_message").html('<p style="color:green">Successfully inserted</p>');
+				  } else {
+				  	$("#input_success_message").html('<p style="color:red">Error while inserting word!</p>');
+				  }
 				});
     }
 	});
