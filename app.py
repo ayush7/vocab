@@ -22,7 +22,7 @@ def random_word():
 	# @param language: base language in which this word should be
 	#
 	# return a random word (with meaning) as a dictionary
-	language = request.args.get('language')
+	language = request.args.get('input_language')
 
 	query = mongo.db[language].aggregate(
   		[{'$sample': { 'size': 1 }}]
