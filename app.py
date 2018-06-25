@@ -1,7 +1,15 @@
-# Main server
+### Main server
+# Imports
 from flask import Flask, request, Response, jsonify, render_template
+from flask_pymongo import PyMongo
+from util import *
+
+# Setup
+ENVIRONMENT = readenv()
 
 app = Flask(__name__)
+app.config['MONGO_HOST'] = ENVIRONMENT['MONGO_HOST']
+mongo = PyMongo(app)
 
 # The basic viewing route
 @app.route('/')
@@ -25,7 +33,7 @@ def insert_word():
 	# @param meaning: the meaning of this word
 	#
 	# insert a new word in the db
-	return
+	return 'OK'
 
 if __name__ == "__main__":
 	app.run(debug=True)
