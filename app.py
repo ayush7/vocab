@@ -40,9 +40,9 @@ def insert_word():
 	# @param meaning: the meaning of this word
 	#
 	# insert a new word in the db
-	word = request.args.get('word')
-	language = request.args.get('language')
-	meaning = request.args.get('meaning')
+	word = request.args.get('input_word')
+	language = request.args.get('input_language')
+	meaning = request.args.get('input_meaning')
 
 	try:
 		mongo.db[language].insert_one({
@@ -50,8 +50,8 @@ def insert_word():
 			'meaning': meaning
 		})
 		return jsonify({'success':True})
-	except e:
-		return jsonify({'exception' : e, 'success':False})
+	except Exception as e:
+		return jsonify({'exception' : str(e), 'success':False})
 
 if __name__ == "__main__":
 	app.run(debug=True)

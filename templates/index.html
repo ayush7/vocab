@@ -1,1 +1,81 @@
-Hello worldo123
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="container">
+		<h1>Vocabulary Builder</h1>
+		<h2>Welcome, Dhruv</h2>
+		<hline>
+		<div class="row">
+			<div class="col-md-6" id="insert" style="background-color:#eee">
+				<h3>Insert new word</h3>
+				<form id="input_new_word_form">
+				  <div class="form-group">
+				    <label for="input_word">Word (in chosen language)</label>
+				    <input type="text" class="form-control" id="input_word" name="input_word" placeholder="Word (in chosen language)">
+				  </div>
+				  <div class="form-group">
+				    <label for="input_meaning">Meaning (in English)</label>
+				    <input type="text" class="form-control" id="input_meaning" name="input_meaning" placeholder="Meaning (in English)">
+				  </div>
+				  <div class="radio">
+					  <label>
+					    <input type="radio" name="input_language" id="input_lang_french" value="french" checked>
+					    Français
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="input_language" id="input_lang_japanese" value="japanese">
+					    日本語
+					  </label>
+					</div>
+				  <button type="submit" class="btn btn-default" id="input_word_submit">Submit</button>
+				</form>
+			</div>
+			<div class="col-md-6">
+				Totes
+			</div>
+	</div>
+</body>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+	// Submit script
+	$("#input_new_word_form").submit(function(event){
+		event.preventDefault();
+    var isValid = true;
+
+    // do all your validation here
+    // potentially if one of the fields is empty 
+    // isValid will be set to false
+    $(":text").each(function() {
+	    if($(this).val() === "") {
+	    	console.log("Empty Field: " + $(this).attr('id'));
+  			isValid = false;
+	    }
+		});
+
+    console.log(isValid);
+    if (isValid) {        
+    		console.log("Submitting form");
+        // call the submission API
+        // show feedback on the screen to indicate that insert was successful
+        var api_call = "/insert-word?" + $(this).serialize();
+        console.log(api_call);
+        $.get(api_call, function(data) {
+				  console.log(data);
+				  // write success/fail message in some div element
+				});
+    }
+	});
+</script>
