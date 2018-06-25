@@ -34,7 +34,18 @@ def insert_word():
 	# @param meaning: the meaning of this word
 	#
 	# insert a new word in the db
-	return 'OK'
+	word = request.args.get('word')
+	language = request.args.get('language')
+	meaning = request.args.get('meaning')
+
+	try:
+		mongo.db[language].insert_one({
+			'word': word,
+			'meaning': meaning
+		})
+		return jsonify({'success':True})
+	except e:
+		return jsonify({'exception' : e, 'success':False})
 
 if __name__ == "__main__":
 	app.run(debug=True)
