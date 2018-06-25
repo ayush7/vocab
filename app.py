@@ -19,13 +19,19 @@ def index():
 
 @app.route('/get-random-word', methods=['GET'])
 def random_word():
-	# @param base_lang: base language in which this word should be
+	# @param language: base language in which this word should be
 	#
 	# return a random word (with meaning) as a dictionary
-  return jsonify({
-  	'word' : 'bonjour',
-  	'meaning' : 'Good day!'
-  })
+	language = request.args.get('language')
+
+	query = mongo.db[language].aggregate(
+  		[{'$sample': { 'size': 1 }}]
+		)
+	random_doc = query.next()
+	return jsonify({
+		'word': random_doc['word'],
+		'meaning': random_doc['meaning']
+	})
 
 @app.route('/insert-word', methods=['GET'])
 def insert_word():
