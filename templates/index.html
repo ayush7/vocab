@@ -5,6 +5,12 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	<style>
+		.col-xs-12 {
+	     z-index: 100;
+		}
+	</style>
+
 </head>
 <body>
 	<div class="container">
@@ -12,36 +18,54 @@
 		<h2>Welcome, Dhruv</h2>
 		<hline>
 		<div class="row">
-			<div class="col-md-6" id="insert" style="background-color:#eee">
-				<h3>Insert new word</h3>
-				<form id="input_new_word_form">
-				  <div class="form-group">
-				    <label for="input_word">Word (in chosen language)</label>
-				    <input type="text" class="form-control" id="input_word" name="input_word" placeholder="Word (in chosen language)">
-				  </div>
-				  <div class="form-group">
-				    <label for="input_meaning">Meaning (in English)</label>
-				    <input type="text" class="form-control" id="input_meaning" name="input_meaning" placeholder="Meaning (in English)">
-				  </div>
-				  <div class="radio">
-					  <label>
-					    <input type="radio" name="input_language" id="input_lang_french" value="french" checked>
-					    Français
-					  </label>
+			<div class="col-xs-12 col-sm-6 col-md-6">
+				<div class="panel panel-default" id="insert">
+					<div class="panel-heading">
+						<button class="panel-title btn" data-toggle="collapse" data-target="#input_new_word">
+							Insert new word
+						</button>
 					</div>
-					<div class="radio">
-					  <label>
-					    <input type="radio" name="input_language" id="input_lang_japanese" value="japanese">
-					    日本語
-					  </label>
+					<div class="collapse panel-body" id="input_new_word">
+						<form id="input_new_word_form">
+						  <div class="form-group">
+						    <label for="input_word">Word (in chosen language)</label>
+						    <input type="text" class="form-control" id="input_word" name="input_word" placeholder="Word (in chosen language)">
+						  </div>
+						  <div class="form-group">
+						    <label for="input_meaning">Meaning (in English)</label>
+						    <input type="text" class="form-control" id="input_meaning" name="input_meaning" placeholder="Meaning (in English)">
+						  </div>
+						  <div class="radio">
+							  <label>
+							    <input type="radio" name="input_language" id="input_lang_french" value="french" checked>
+							    Français
+							  </label>
+							</div>
+							<div class="radio">
+							  <label>
+							    <input type="radio" name="input_language" id="input_lang_japanese" value="japanese">
+							    日本語
+							  </label>
+							</div>
+						  <button type="submit" class="btn btn-default" id="input_word_submit">Submit</button>
+						  <span id="input_success_message"></span>
+						</form>
 					</div>
-				  <button type="submit" class="btn btn-default" id="input_word_submit">Submit</button>
-				  <span id="input_success_message"></span>
-				</form>
+				</div>
 			</div>
-			<div class="col-md-6">
-				Totes
+
+			<div class="col-xs-12 col-sm-6 col-md-6">
+				<div class="panel panel-default" id="insert">
+					<div class="panel-heading">
+						<button class="panel-title btn" data-toggle="collapse" data-target="#practice_word">
+							Practice on Random Words
+						</button>
+					</div>
+					<div class="collapse panel-body" id="practice_word">
+					</div>
+				</div>
 			</div>
+		</div>
 	</div>
 </body>
 
@@ -49,6 +73,9 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script>
 	// Submit script
