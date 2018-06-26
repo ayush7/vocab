@@ -39,10 +39,17 @@ def insert_word():
 	# @param language: which language this word is in
 	# @param meaning: the meaning of this word
 	#
-	# insert a new word in the db
+	# insert a new word in the db, ONLY if the user has
+	# entered the correct 'secret' word
 	word = request.args.get('input_word')
 	language = request.args.get('input_language')
 	meaning = request.args.get('input_meaning')
+	secret = request.args.get('input_secret')
+
+	# check if the secret is correct
+	if (secret != ENVIRONMENT['INSERT_SECRET']):
+		print "The secret was incorrect!"
+		return jsonify({"success": False})
 
 	try:
 		mongo.db[language].insert_one({
