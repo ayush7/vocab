@@ -80,7 +80,12 @@
 								  </label>
 								</div>
 								<button type="submit" class="btn btn-default" id="get_random_word">Get Word</button>
-
+								<div class="checkbox">
+							    <label>
+							      <input id="show_english_meaning" type="checkbox"> practice English --> Language
+							    </label>
+							  </div>
+								<!-- THE DIV WHERE THE RANDOM WORD SHALL APPEAR -->
 								<div id="random_word"></div>
 						</form>
 					</div>
@@ -144,8 +149,19 @@
 
 		// get random word
 		$.get("/get-random-word?" + $(this).serialize(), function(data) {
+			// generate HTML to be rendered
+			// We need to check whether we will show the english word or the language word
+			// depending on what one wants to practice
+			// this will be found using #$("#show_english_meaning").is(":checked")
+			var random_word_html = "";
+			if ($("#show_english_meaning").is(":checked")) {
+				random_word_html = '<h3>Word: <b>' + data.meaning + '</b></h3><div id="random_meaning"><button class="btn btn-default" onclick="revealWord(&quot;' + data.word + '&quot;)">Show Meaning</button></div>';
+			} else {
+				random_word_html = '<h3>Word: <b>' + data.word + '</b></h3><div id="random_meaning"><button class="btn btn-default" onclick="revealWord(&quot;' + data.meaning + '&quot;)">Show Meaning</button></div>';
+			}
+
 			// render HTML
-			$("#random_word").html('<h3>Word: <b>' + data.word + '</b></h3><div id="random_meaning"><button class="btn btn-default" onclick="revealWord(&quot;' + data.meaning + '&quot;)">Show Meaning</button></div>');
+			$("#random_word").html(random_word_html);
 		});
 	})
 </script>
