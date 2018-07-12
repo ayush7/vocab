@@ -9,7 +9,7 @@ def readenvline(line, dictionary):
 		dictionary[envvar[0]] = envvar[1]
 	except IndexError:
 		# incorrect format
-		print "Incorrect format for environment variable in line '{}'".format(line)
+		print ("Incorrect format for environment variable in line '{}'".format(line))
 
 def readenv():
 	# read env variables into dictionary and return

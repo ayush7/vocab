@@ -10,6 +10,7 @@ ENVIRONMENT = readenv()
 app = Flask(__name__)
 app.config['MONGO_HOST'] = ENVIRONMENT['MONGO_HOST']
 app.config['MONGO_DBNAME'] = ENVIRONMENT['MONGO_DBNAME']
+app.config["MONGO_URI"] = "mongodb://localhost:27017/myDatabase"
 mongo = PyMongo(app)
 
 # The basic viewing route
@@ -48,7 +49,7 @@ def insert_word():
 
 	# check if the secret is correct
 	if (secret != ENVIRONMENT['INSERT_SECRET']):
-		print "The secret was incorrect!"
+		print ("The secret was incorrect!")
 		return jsonify({"success": False})
 
 	try:
